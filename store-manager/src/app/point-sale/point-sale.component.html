@@ -1,0 +1,187 @@
+<div id="pdv" class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <form class="example-form">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"
+            ><img
+              src="../../assets/img/pacotes.png"
+              alt="Digite o nome do produto"
+          /></span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Digite o nome do produto..."
+            aria-label="Digite o nome do produto..."
+            aria-describedby="basic-addon1"
+          />
+        </div>
+      </form>
+
+      <mat-card style="background-color: white">
+        <div class="table table-hover">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Selecionar</th>
+                <th scope="col">COD</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Valor</th>
+                <th scope="col" style="text-align: center">QTD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                [ngStyle]="{
+                  'font-weight': listItens.includes('1') ? 'bold' : '',
+                  color: listItens.includes('1') ? '#4169e1' : 'black'
+                }"
+              >
+                <td>
+                  <input type="checkbox" (click)="changeIsActive('1')" />
+                </td>
+                <td>1</td>
+                <td>Botijão</td>
+                <td>R$ 20,00</td>
+                <td
+                  class="d-flex justify-content-center align-items-center"
+                  *ngIf="listItens.includes('1')"
+                >
+                  <button class="btn" (click)="increaseQuantity('1')">
+                    <i class="fas fa-plus" style="color: black"></i>
+                  </button>
+
+                  <span style="margin: 0.3rem; font-size: large">{{
+                    qtd
+                  }}</span>
+                  <button class="btn" (click)="decreaseQuantity('1')">
+                    <i class="fas fa-minus" style="color: black"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr
+                [ngStyle]="{
+                  'font-weight': listItens.includes('2') ? 'bold' : '',
+                  color: listItens.includes('2') ? '#4169e1' : 'black'
+                }"
+              >
+                <td>
+                  <input type="checkbox" (click)="changeIsActive('2')" />
+                </td>
+                <td>2</td>
+                <td>Farinha</td>
+                <td>R$ 10,00</td>
+                <td
+                  class="d-flex justify-content-center align-items-center"
+                  *ngIf="listItens.includes('2')"
+                >
+                  <button class="btn" (click)="increaseQuantity('2')">
+                    <i class="fas fa-plus" style="color: black"></i>
+                  </button>
+
+                  <span style="margin: 0.3rem; font-size: large">{{
+                    qtd
+                  }}</span>
+                  <button class="btn" (click)="decreaseQuantity('2')">
+                    <i class="fas fa-minus" style="color: black"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr
+                [ngStyle]="{
+                  'font-weight': listItens.includes('3') ? 'bold' : '',
+                  color: listItens.includes('3') ? '#4169e1' : 'black'
+                }"
+              >
+                <td>
+                  <input type="checkbox" (click)="changeIsActive('3')" />
+                </td>
+                <td>3</td>
+                <td>Leite</td>
+                <td>R$ 5.50,00</td>
+                <td
+                  class="d-flex justify-content-center align-items-center"
+                  *ngIf="listItens.includes('3')"
+                >
+                  <button class="btn" (click)="increaseQuantity('3')">
+                    <i class="fas fa-plus" style="color: black"></i>
+                  </button>
+
+                  <span style="margin: 0.3rem; font-size: large">{{
+                    qtd
+                  }}</span>
+                  <button class="btn" (click)="decreaseQuantity('3')">
+                    <i class="fas fa-minus" style="color: black"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-4">
+      <mat-card id="card-sub-total">
+        <div class="row border-padding">
+          <div class="col d-flex justify-content-center align-items-center">
+            <i class="far fa-clock" style="margin: 0.5rem"></i>
+            <span>Sexta -Feira 18 | 12 | 2020 | 11:43</span>
+          </div>
+        </div>
+        <div class="row padding">
+          <div class="col-8 text-uppercase">Subtotal</div>
+          <div class="col-4">R$ 532,00</div>
+        </div>
+        <div class="row padding">
+          <div class="col-8">Descontos I</div>
+          <div class="col-4">-</div>
+        </div>
+        <div class="row padding" style="border-bottom: solid 1px white">
+          <div class="col-8">Descontos II</div>
+          <div class="col-4">-</div>
+        </div>
+
+        <div class="row padding">
+          <div class="col-8">Total Compra</div>
+          <div class="col-4">-</div>
+        </div>
+        <div class="row padding">
+          <div class="col-8">Descontos</div>
+          <div class="col-4">-</div>
+        </div>
+        <div class="row border-padding">
+          <div class="col-8 text-uppercase">Total</div>
+          <div class="col-4">-</div>
+        </div>
+
+        <div class="row" style="margin: 2rem 0rem 0rem 0.1rem">
+          <div class="col-6" style="margin-bottom: 1rem">
+            <button type="button" class="btn btn-light" style="width: 10rem">
+              Crédito
+            </button>
+          </div>
+          <div class="col-6" style="margin-bottom: 1rem">
+            <button type="button" class="btn btn-light" style="width: 10rem">
+              Débito
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-light" style="width: 10rem">
+              Dinheiro
+            </button>
+          </div>
+          <div class="col-6">
+            <button type="button" class="btn btn-light" style="width: 10rem">
+              Transferência
+            </button>
+          </div>
+
+          <div class="col-12">
+            <button id="btn-finish" type="button" class="btn">Finalizar</button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

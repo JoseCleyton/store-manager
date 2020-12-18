@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.top {
+  background-color: #4169e1;
+  padding: 1rem 1rem 0.5rem 1rem;
+  span {
+    padding: 0.3rem;
+  }
+}
+.menu {
+  background-color: #4169e1;
+  color: white;
+  padding: 1rem 1rem 0.5rem 1rem;
+  span {
+    padding: 0.3rem;
+  }
+}

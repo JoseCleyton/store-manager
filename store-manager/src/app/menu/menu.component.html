@@ -1,0 +1,27 @@
+<mat-card class="menu">
+  <div class="row">
+    <div class="col-3 d-flex justify-content-center align-items-center">
+      <h2>Store Manager</h2>
+      <span>
+        <i class="fas fa-store"></i>
+      </span>
+    </div>
+    <nav class="row d-flex justify-content-end align-items-center">
+      <div class="col">
+        <a (click)="routes('dashboard')" class="btn">Dashboard</a>
+      </div>
+      <div class="col">
+        <a class="btn" (click)="routes('point-sale')">PDV</a>
+      </div>
+      <div class="col">
+        <a (click)="routes('client')" class="btn">Clientes</a>
+      </div>
+      <div class="col">
+        <a class="btn" (click)="routes('stok')">Estoque</a>
+      </div>
+      <div class="col">
+        <a class="btn" (click)="routes('cashier')">Caixa</a>
+      </div>
+    </nav>
+  </div>
+</mat-card>
