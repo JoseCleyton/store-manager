@@ -1,119 +1,101 @@
-<div id="pdv" class="container-fluid">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8">
-      <form class="example-form">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="basic-addon1"
-            ><img
-              src="../../assets/img/pacotes.png"
-              alt="Digite o nome do produto"
-          /></span>
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Digite o nome do produto..."
-            aria-label="Digite o nome do produto..."
-            aria-describedby="basic-addon1"
-          />
-        </div>
-      </form>
+    <div id="form-pdv" class="col-8">
+      <mat-card style="margin-bottom: 1rem">
+        <form
+          [formGroup]="formProduct"
+          class="example-form"
+          #formDirective="ngForm"
+          (ngSubmit)="addProductToList(formDirective)"
+        >
+          <div class="row">
+            <div class="col-5 d-flex align-items-center">
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Produto</mat-label>
+                <mat-select formControlName="product">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let item of stock" [value]="item">
+                    {{ item.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-4 d-flex align-items-center">
+              <mat-form-field class="example-full-width">
+                <mat-label>Quantidade</mat-label>
+                <input
+                  type="number"
+                  matInput
+                  placeholder="Ex. 10"
+                  formControlName="quantity"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-3 d-flex align-items-center">
+              <div class="example-button-row">
+                <button
+                  type="submit"
+                  mat-raised-button
+                  class="btn"
+                  [disabled]="!formProduct.valid"
+                >
+                  Adicionar
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </mat-card>
 
-      <mat-card style="background-color: white">
+      <mat-card>
         <div class="table table-hover">
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">Selecionar</th>
-                <th scope="col">COD</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Valor</th>
-                <th scope="col" style="text-align: center">QTD</th>
+                <th scope="col" class="text-center">Selecionar</th>
+                <th scope="col" class="text-center">COD</th>
+                <th scope="col" class="text-center">Nome</th>
+                <th scope="col" class="text-center">Valor</th>
+                <th scope="col" class="text-center">QTD</th>
               </tr>
             </thead>
             <tbody>
               <tr
+                *ngFor="let item of listItens; let i = index"
                 [ngStyle]="{
-                  'font-weight': listItens.includes('1') ? 'bold' : '',
-                  color: listItens.includes('1') ? '#4169e1' : 'black'
+                  color: itemsEdit.includes(item.id) ? '#4169e1' : '',
+                  'font-weight': itemsEdit.includes(item.id) ? 'bold' : ''
                 }"
               >
-                <td>
-                  <input type="checkbox" (click)="changeIsActive('1')" />
+                <td class="text-center">
+                  <section>
+                    <mat-checkbox
+                      class="example-margin"
+                      color="primary"
+                      (change)="selectItem(item)"
+                    ></mat-checkbox>
+                  </section>
                 </td>
-                <td>1</td>
-                <td>Botijão</td>
-                <td>R$ 20,00</td>
-                <td
-                  class="d-flex justify-content-center align-items-center"
-                  *ngIf="listItens.includes('1')"
-                >
-                  <button class="btn" (click)="increaseQuantity('1')">
-                    <i class="fas fa-plus" style="color: black"></i>
-                  </button>
-
-                  <span style="margin: 0.3rem; font-size: large">{{
-                    qtd
-                  }}</span>
-                  <button class="btn" (click)="decreaseQuantity('1')">
-                    <i class="fas fa-minus" style="color: black"></i>
-                  </button>
+                <td class="text-center">{{ item.id }}</td>
+                <td class="text-center">{{ item.name }}</td>
+                <td class="text-center">{{ item.price | currency: "BRL" }}</td>
+                <td class="text-center">
+                  <input
+                    matInput
+                    type="number"
+                    #quantity
+                    [value]="item.quantity"
+                    [disabled]="!itemsEdit.includes(item.id)"
+                    (input)="changeQuantity(item, quantity.value)"
+                  />
                 </td>
               </tr>
-
-              <tr
-                [ngStyle]="{
-                  'font-weight': listItens.includes('2') ? 'bold' : '',
-                  color: listItens.includes('2') ? '#4169e1' : 'black'
-                }"
-              >
-                <td>
-                  <input type="checkbox" (click)="changeIsActive('2')" />
-                </td>
-                <td>2</td>
-                <td>Farinha</td>
-                <td>R$ 10,00</td>
-                <td
-                  class="d-flex justify-content-center align-items-center"
-                  *ngIf="listItens.includes('2')"
-                >
-                  <button class="btn" (click)="increaseQuantity('2')">
-                    <i class="fas fa-plus" style="color: black"></i>
-                  </button>
-
-                  <span style="margin: 0.3rem; font-size: large">{{
-                    qtd
-                  }}</span>
-                  <button class="btn" (click)="decreaseQuantity('2')">
-                    <i class="fas fa-minus" style="color: black"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr
-                [ngStyle]="{
-                  'font-weight': listItens.includes('3') ? 'bold' : '',
-                  color: listItens.includes('3') ? '#4169e1' : 'black'
-                }"
-              >
-                <td>
-                  <input type="checkbox" (click)="changeIsActive('3')" />
-                </td>
-                <td>3</td>
-                <td>Leite</td>
-                <td>R$ 5.50,00</td>
-                <td
-                  class="d-flex justify-content-center align-items-center"
-                  *ngIf="listItens.includes('3')"
-                >
-                  <button class="btn" (click)="increaseQuantity('3')">
-                    <i class="fas fa-plus" style="color: black"></i>
-                  </button>
-
-                  <span style="margin: 0.3rem; font-size: large">{{
-                    qtd
-                  }}</span>
-                  <button class="btn" (click)="decreaseQuantity('3')">
-                    <i class="fas fa-minus" style="color: black"></i>
-                  </button>
+              <tr *ngIf="listItens.length === 0">
+                <td colspan="5">
+                  <span
+                    class="alert alert-primary d-flex justify-content-center align-items-center"
+                    >Nenhum item adicionado!</span
+                  >
                 </td>
               </tr>
             </tbody>
@@ -121,17 +103,17 @@
         </div>
       </mat-card>
     </div>
-    <div class="col-4">
-      <mat-card id="card-sub-total">
+    <div id="card-sub-total" class="col-4">
+      <mat-card>
         <div class="row border-padding">
           <div class="col d-flex justify-content-center align-items-center">
             <i class="far fa-clock" style="margin: 0.5rem"></i>
-            <span>Sexta -Feira 18 | 12 | 2020 | 11:43</span>
+            <span>{{ day }} {{ time }}</span>
           </div>
         </div>
         <div class="row padding">
           <div class="col-8 text-uppercase">Subtotal</div>
-          <div class="col-4">R$ 532,00</div>
+          <div class="col-4">{{ subTotal | currency: "BRL" }}</div>
         </div>
         <div class="row padding">
           <div class="col-8">Descontos I</div>
@@ -144,7 +126,7 @@
 
         <div class="row padding">
           <div class="col-8">Total Compra</div>
-          <div class="col-4">-</div>
+          <div class="col-4">{{ subTotal | currency: "BRL" }}</div>
         </div>
         <div class="row padding">
           <div class="col-8">Descontos</div>
@@ -152,33 +134,84 @@
         </div>
         <div class="row border-padding">
           <div class="col-8 text-uppercase">Total</div>
-          <div class="col-4">-</div>
+          <div class="col-4">{{ subTotal | currency: "BRL" }}</div>
         </div>
 
         <div class="row" style="margin: 2rem 0rem 0rem 0.1rem">
           <div class="col-6" style="margin-bottom: 1rem">
-            <button type="button" class="btn btn-light" style="width: 10rem">
-              Crédito
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              (click)="selectPaymentType('credit')"
+            >
+              <span style="margin: 0.2rem"> Crédito </span>
+              <i
+                *ngIf="paymentType === 'credit'"
+                class="fas fa-check"
+                style="color: #43b39e"
+              ></i>
             </button>
           </div>
           <div class="col-6" style="margin-bottom: 1rem">
-            <button type="button" class="btn btn-light" style="width: 10rem">
-              Débito
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              (click)="selectPaymentType('debit')"
+            >
+              <span style="margin: 0.2rem"> Débito </span>
+              <i
+                *ngIf="paymentType === 'debit'"
+                class="fas fa-check"
+                style="color: #43b39e"
+              ></i>
             </button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-light" style="width: 10rem">
-              Dinheiro
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              (click)="selectPaymentType('money')"
+            >
+              <span style="margin: 0.2rem"> Dinheiro </span>
+              <i
+                *ngIf="paymentType === 'money'"
+                class="fas fa-check"
+                style="color: #43b39e"
+              ></i>
             </button>
           </div>
           <div class="col-6">
-            <button type="button" class="btn btn-light" style="width: 10rem">
-              Transferência
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              (click)="selectPaymentType('transf')"
+            >
+              <span style="margin: 0.2rem"> Transferência </span>
+              <i
+                *ngIf="paymentType === 'transf'"
+                class="fas fa-check"
+                style="color: #43b39e"
+              ></i>
             </button>
           </div>
-
           <div class="col-12">
-            <button id="btn-finish" type="button" class="btn">Finalizar</button>
+            <button
+              id="btn-finish"
+              mat-raised-button
+              class="btn"
+              (click)="openDialog()"
+              [disabled]="listItens.length === 0 || paymentType === ''"
+            >
+              Finalizar
+            </button>
           </div>
         </div>
       </mat-card>

@@ -8,19 +8,63 @@
     </div>
     <nav class="row d-flex justify-content-end align-items-center">
       <div class="col">
-        <a (click)="routes('dashboard')" class="btn">Dashboard</a>
+        <a
+          [ngStyle]="{
+            'background-color':
+              urlRoot === '/feature/dashboard' ? 'white' : '',
+            'color': urlRoot === '/feature/dashboard' ? '#4169e1' : ''
+          }"
+          (click)="routes('dashboard')"
+          class="btn"
+          >Dashboard</a
+        >
       </div>
       <div class="col">
-        <a class="btn" (click)="routes('point-sale')">PDV</a>
+        <a
+          [ngStyle]="{
+            'background-color':
+              urlRoot === '/feature/point-sale' ? 'white' : '',
+            'color': urlRoot === '/feature/point-sale' ? '#4169e1' : ''
+          }"
+          class="btn"
+          (click)="routes('point-sale')"
+          >PDV</a
+        >
       </div>
       <div class="col">
-        <a (click)="routes('client')" class="btn">Clientes</a>
+        <a
+          [ngStyle]="{
+            'background-color':
+              urlRoot === '/feature/client' ? 'white' : '',
+            'color': urlRoot === '/feature/client' ? '#4169e1' : ''
+          }"
+          (click)="routes('client')"
+          class="btn"
+          >Clientes</a
+        >
       </div>
       <div class="col">
-        <a class="btn" (click)="routes('stok')">Estoque</a>
+        <a
+          [ngStyle]="{
+            'background-color':
+              urlRoot === '/feature/stok' ? 'white' : '',
+            'color': urlRoot === '/feature/stok' ? '#4169e1' : ''
+          }"
+          class="btn"
+          (click)="routes('stok')"
+          >Estoque</a
+        >
       </div>
       <div class="col">
-        <a class="btn" (click)="routes('cashier')">Caixa</a>
+        <a
+          [ngStyle]="{
+            'background-color':    urlRoot === '/feature/cashier' ? 'white' : '',
+            'color': urlRoot === '/feature/cashier' ? '#4169e1' : ''
+          }"
+          class="btn"
+          (click)="routes('cashier')"
+          >Caixa</a
+        >
       </div>
     </nav>
   </div>

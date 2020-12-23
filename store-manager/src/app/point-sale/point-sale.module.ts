@@ -1,11 +1,16 @@
+import { CheckoutModule } from './../checkout/checkout.module';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { PointSaleComponent } from './point-sale.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PointSaleRoutingModule } from './point-sale-routing.module';
-import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [PointSaleComponent],
@@ -13,8 +18,13 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     PointSaleRoutingModule,
     MatCardModule,
+    MatSelectModule,
     MatInputModule,
-    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatDialogModule,
+    CheckoutModule
   ],
   exports: [PointSaleComponent],
 })

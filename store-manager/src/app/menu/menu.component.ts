@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   constructor(private router: Router) {}
-  public urlRoot = '';
+  public urlRoot;
   ngOnInit(): void {
     this.urlRoot = this.router.url;
+    this.router.events.subscribe((url: any) => (this.urlRoot = url.url));
   }
 
   routes(path: string) {
