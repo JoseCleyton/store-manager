@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="container">
+    <form
+      [formGroup]="formClient"
+      class="example-form"
+      #formDirective="ngForm"
+      (ngSubmit)="addClient(formDirective)"
+    >
+      <mat-form-field class="example-full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="Ex. João" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Endereço</mat-label>
+        <textarea matInput formControlName="address"></textarea>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefone</mat-label>
+        <textarea
+          matInput
+          placeholder="(00) 0.0000-0000"
+          formControlName="phoneNumber"
+        ></textarea>
+      </mat-form-field>
+      <div class="row">
+        <div class="col-10">
+          <button mat-raised-button type="button" (click)="onNoClick()">
+            Fechar
+          </button>
+        </div>
+        <div class="col-2">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!formClient.valid"
+            type="submit"
+          >
+            Cadastrar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

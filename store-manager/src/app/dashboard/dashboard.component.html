@@ -15,7 +15,9 @@
                 </div>
               </div>
               <div class="col-8">
-                <div class="font-weight-bold text-uppercase text-left">124</div>
+                <div class="font-weight-bold text-uppercase text-left">
+                  {{ totalClients }}
+                </div>
                 <div class="text-lowercase">Total de Clientes</div>
               </div>
             </div>
@@ -36,7 +38,9 @@
                 </div>
               </div>
               <div class="col-8">
-                <div class="font-weight-bold text-uppercase text-left">56</div>
+                <div class="font-weight-bold text-uppercase text-left">
+                  {{ totalStock }}
+                </div>
                 <div class="text-lowercase">Total no Estoque</div>
               </div>
             </div>
@@ -163,50 +167,4 @@
       </div>
     </mat-card>
   </div>
-  <!--
- <div class="container" style="margin-top: 2rem">
-    <div class="col-xl-6 col-md-12 mb-12" style="float: right">
-      <div class="card border-left-success shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <canvas
-                baseChart
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                [plugins]="lineChartPlugins"
-              >
-              </canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="col-xl-6 col-md-12 mb-12" style="float: left">
-      <div class="card border-left-primary shadow h-100 py-2">
-        <div class="card-body">
-          <div class="row no-gutters align-items-center">
-            <div class="col mr-2">
-              <canvas
-                baseChart
-                [datasets]="lineChartData2"
-                [labels]="lineChartLabels2"
-                [colors]="lineChartColors2"
-                [legend]="lineChartLegend2"
-                [chartType]="lineChartType2"
-                [plugins]="lineChartPlugins"
-              >
-              </canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
---></div>
+</div>
