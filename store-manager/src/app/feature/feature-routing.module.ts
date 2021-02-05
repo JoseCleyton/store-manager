@@ -22,6 +22,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../point-sale/point-sale.module').then((m) => m.PointSaleModule),
       },
+      {
+        path: 'stock',
+        loadChildren: () =>
+          import('../stock/stock.module').then((m) => m.StockModule),
+      },
     ],
   },
 ];

@@ -6,6 +6,14 @@ export enum ClientActionsTypes {
 
   LIST_CLIENTS = '[Client] List Clients',
   LIST_CLIENTS_SUCCESS = '[Client] List Clients success',
+
+  EDIT_CLIENT = '[Client] Edit Client',
+  EDIT_CLIENT_SUCCESS = '[Client] Edit Client Success',
+
+  SELECT_CLIENT = '[Client] Select Client',
+
+  DELETE_CLIENT = '[Client] Delete Client',
+  DELETE_CLIENT_SUCCESS = '[Client] Delete Client Success',
 }
 
 export class AddClient implements Action {
@@ -28,8 +36,38 @@ export class ListClientsSuccess implements Action {
   constructor(public payload: any[]) {}
 }
 
+export class EditClient implements Action {
+  readonly type = ClientActionsTypes.EDIT_CLIENT;
+  constructor(public payload: any) {}
+}
+
+export class EditClientSuccess implements Action {
+  readonly type = ClientActionsTypes.EDIT_CLIENT_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class SelectClient implements Action {
+  readonly type = ClientActionsTypes.SELECT_CLIENT;
+  constructor(public client: any) {}
+}
+
+export class DeleteClient implements Action {
+  readonly type = ClientActionsTypes.DELETE_CLIENT;
+  constructor(public id: string) {}
+}
+
+export class DeleteClientSuccess implements Action {
+  readonly type = ClientActionsTypes.DELETE_CLIENT_SUCCESS;
+  constructor(public id: string) {}
+}
+
 export type ClientActions =
   | AddClient
   | AddClientSuccess
   | ListClients
-  | ListClientsSuccess;
+  | ListClientsSuccess
+  | SelectClient
+  | DeleteClient
+  | DeleteClientSuccess
+  | EditClient
+  | EditClientSuccess;

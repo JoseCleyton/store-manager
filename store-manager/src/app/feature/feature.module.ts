@@ -1,3 +1,4 @@
+import { StockModule } from './../stock/stock.module';
 import { PointSaleModule } from './../point-sale/point-sale.module';
 import { DashboardModule } from './../dashboard/dashboard.module';
 import { ClientModule } from './../client/client.module';
@@ -17,6 +18,7 @@ import { FeatureComponent } from './feature.component';
     ClientModule,
     DashboardModule,
     PointSaleModule,
+    StockModule
   ],
 })
 export class FeatureModule {}

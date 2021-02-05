@@ -21,13 +21,15 @@ export class ClientEditComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
+  public selectedClient: any;
+
   constructor(
     public dialogRef: MatDialogRef<ClientEditComponent>,
     private store$: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-
+    this.subscribeSelectedClient();
     this.subscribeToClients();
 
     this.formClient = new FormGroup({
@@ -38,6 +40,8 @@ export class ClientEditComponent implements OnInit, OnDestroy {
         Validators.minLength(11),
       ]),
     });
+
+    this.buildFormEditClient();
   }
 
   ngOnDestroy() {
@@ -50,13 +54,19 @@ export class ClientEditComponent implements OnInit, OnDestroy {
 
   public addClient(formDirective: FormGroupDirective) {
     this.formDirective = formDirective;
-    const client = {
+    let client: any = {
       name: this.formClient.get('name').value,
       address: this.formClient.get('address').value,
       phoneNumber: this.formClient.get('phoneNumber').value,
     };
-    this.store$.dispatch(new fromClient.actions.AddClient(client));
+    if (this.selectedClient) {
+      client.id = this.selectedClient._id;
+      this.store$.dispatch(new fromClient.actions.EditClient(client));
+    } else {
+      this.store$.dispatch(new fromClient.actions.AddClient(client));
+    }
   }
+
   public subscribeToClients() {
     this.subscription.add(
       this.store$
@@ -70,5 +80,25 @@ export class ClientEditComponent implements OnInit, OnDestroy {
           }
         })
     );
+  }
+
+  public subscribeSelectedClient() {
+    this.subscription.add(
+      this.store$
+        .pipe(select(fromClient.selectors.selectSelectedClient))
+        .subscribe((state) => {
+          this.selectedClient = state;
+        })
+    );
+  }
+
+  public buildFormEditClient() {
+    if (this.selectedClient) {
+      this.formClient.get('name').setValue(this.selectedClient.name);
+      this.formClient.get('address').setValue(this.selectedClient.address);
+      this.formClient
+        .get('phoneNumber')
+        .setValue(this.selectedClient.phoneNumber);
+    }
   }
 }

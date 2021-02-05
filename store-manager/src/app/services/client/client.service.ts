@@ -14,10 +14,18 @@ export class ClientService {
   }
 
   public addClient(client: any): Observable<any> {
-    return this.http.post(URL.API + 'client/addClient', client);
+    return this.http.post(URL.API + 'client', client);
   }
 
   public listClients(): Observable<any> {
     return this.http.get(URL.API + 'client');
+  }
+
+  public editClient(client: any): Observable<any> {
+    return this.http.put(URL.API + 'client', client);
+  }
+
+  public delClient(id: string): Observable<any> {
+    return this.http.delete(URL.API + 'client/' + id);
   }
 }

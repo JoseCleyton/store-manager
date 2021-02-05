@@ -41,4 +41,36 @@ export class ClientEffects {
       )
     )
   );
+
+  @Effect()
+  editClient = this.actions$.pipe(
+    ofType<actions.EditClient>(actions.ClientActionsTypes.EDIT_CLIENT),
+    switchMap((action) =>
+      this.clienteService.editClient(action.payload).pipe(
+        switchMap((response) => {
+          return [
+            new fromAlert.actions.Success('Cliente atualizado com sucesso...'),
+            new actions.EditClientSuccess(response.client),
+          ];
+        }),
+        catchError((err) => of(new fromAlert.actions.Error(err.message)))
+      )
+    )
+  );
+
+  @Effect()
+  delClient = this.actions$.pipe(
+    ofType<actions.DeleteClient>(actions.ClientActionsTypes.DELETE_CLIENT),
+    switchMap((action) =>
+      this.clienteService.delClient(action.id).pipe(
+        switchMap((response) => {
+          return [
+            new fromAlert.actions.Success('Cliente deletado com sucesso...'),
+            new actions.DeleteClientSuccess(action.id),
+          ];
+        }),
+        catchError((err) => of(new fromAlert.actions.Error(err.message)))
+      )
+    )
+  );
 }

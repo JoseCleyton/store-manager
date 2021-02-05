@@ -7,3 +7,8 @@ export const selectClients = createSelector(
   selectClient,
   (state) => state.clients
 );
+
+export const selectSelectedClient = createSelector(
+  selectClient,
+  (state) => state.selectedClient
+);

@@ -13,9 +13,10 @@ import { CommonModule } from '@angular/common';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { ClientDelComponent } from './client-del/client-del.component';
 
 @NgModule({
-  declarations: [ClientComponent, ClientEditComponent],
+  declarations: [ClientComponent, ClientEditComponent, ClientDelComponent],
   imports: [
     CommonModule,
     ClientRoutingModule,
@@ -24,9 +25,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
     MatBottomSheetModule,
-    MatProgressBarModule,
   ],
   exports: [ClientComponent],
   providers: [ClientService],

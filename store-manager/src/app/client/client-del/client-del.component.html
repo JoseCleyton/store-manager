@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div
+      class="col d-flex justify-content-center align-items-center"
+      style="padding: 10px"
+    >
+      <img src="../../../assets/img/icons8-erro-64.png" />
+    </div>
+  </div>
+  <div class="row">
+    <div
+      class="col d-flex justify-content-center align-items-center"
+      style="padding: 10px"
+    >
+      <h4>Deseja realmente <strong>deletar</strong> esse cliente?</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col d-flex justify-content-center align-items-center">
+      <button mat-raised-button type="button" (click)="onNoClick()">
+        Não
+      </button>
+    </div>
+    <div class="col d-flex justify-content-center align-items-center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="delClient()"
+      >
+        Sim
+      </button>
+    </div>
+  </div>
+</div>

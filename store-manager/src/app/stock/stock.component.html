@@ -1,7 +1,7 @@
-<div id="client" class="container-fluid">
+<div id="stock" class="container-fluid">
   <div class="row">
     <div class="col-4 d-flex justify-content-center align-items-center">
-      <button class="btn" (click)="addClient()">
+      <button class="btn" (click)="addProduct()">
         <i class="fas fa-plus-circle"></i><span>Novo</span>
       </button>
     </div>
@@ -11,8 +11,8 @@
     >
       <button
         class="btn"
-        [disabled]="selectedClient === undefined"
-        (click)="editClient()"
+        [disabled]="selectedProduct === undefined"
+        (click)="editProduct()"
       >
         <i class="far fa-edit"></i><span>Editar</span>
       </button>
@@ -20,8 +20,8 @@
     <div class="col-4 d-flex justify-content-center align-items-center">
       <button
         class="btn"
-        [disabled]="selectedClient === undefined"
-        (click)="delClient()"
+        [disabled]="selectedProduct === undefined"
+        (click)="delProduct()"
       >
         <i class="far fa-trash-alt"></i><span>Deletar</span>
       </button>
@@ -33,40 +33,40 @@
         <thead>
           <tr>
             <th class="text-center" scope="col">Nome</th>
-            <th class="text-center" scope="col">Endereço</th>
-            <th class="text-center" scope="col">Telefone</th>
+            <th class="text-center" scope="col">Preço</th>
+            <th class="text-center" scope="col">Quantidade</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            *ngFor="let client of clients"
+            *ngFor="let product of products"
             [ngStyle]="{
               'font-weight':
-                selectedClient !== undefined &&
-                selectedClient._id === client._id
+                selectedProduct !== undefined &&
+                selectedProduct._id === product._id
                   ? 'bold'
                   : '',
               color:
-                selectedClient !== undefined &&
-                selectedClient._id === client._id
+                selectedProduct !== undefined &&
+                selectedProduct._id === product._id
                   ? '#4169e1'
                   : 'black'
             }"
-            (click)="changeIsActive(client)"
+            (click)="changeIsActive(product)"
           >
-            <td class="text-center" >{{ client.name }}</td>
-            <td class="text-center" >{{ client.address }}</td>
-            <td class="text-center" >{{ client.phoneNumber }}</td>
+            <td class="text-center" >{{ product.name }}</td>
+            <td class="text-center" >{{ product.price | currency:'BRL'}}</td>
+            <td class="text-center" >{{ product.quantity }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div
-      *ngIf="clients.length === 0"
+      *ngIf="products.length === 0"
       class="alert alert-warning d-flex justify-content-center align-items-center"
       role="alert"
     >
-      <h4>Nenhum cliente cadastrado !</h4>
+      <h4>Estoque vazio !</h4>
     </div>
   </mat-card>
 </div>

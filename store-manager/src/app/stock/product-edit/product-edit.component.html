@@ -1,26 +1,26 @@
 <div class="container-fluid">
   <div class="container">
     <form
-      [formGroup]="formClient"
+      [formGroup]="formProduct"
       class="example-form"
       #formDirective="ngForm"
-      (ngSubmit)="addClient(formDirective)"
+      (ngSubmit)="addProduct(formDirective)"
     >
       <mat-form-field class="example-full-width">
         <mat-label>Nome</mat-label>
-        <input matInput placeholder="Ex. João" formControlName="name" />
+        <input matInput placeholder="Ex. Arroz" formControlName="name" />
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
-        <mat-label>Endereço</mat-label>
-        <textarea matInput formControlName="address"></textarea>
+        <mat-label>Preço</mat-label>
+        <input type="number" matInput placeholder="Ex. 100" formControlName="price">
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-label>Telefone</mat-label>
+        <mat-label>Quantidade</mat-label>
         <textarea
           matInput
-          placeholder="(00) 0.0000-0000"
-          formControlName="phoneNumber"
+          placeholder="10"
+          formControlName="quantity"
         ></textarea>
       </mat-form-field>
       <div class="row">
@@ -33,10 +33,10 @@
           <button
             mat-raised-button
             color="primary"
-            [disabled]="!formClient.valid"
+            [disabled]="!formProduct.valid"
             type="submit"
           >
-            {{ selectedClient === undefined ? "Cadastrar" : "Editar" }}
+            {{ selectedProduct === undefined ? "Cadastrar" : "Editar" }}
           </button>
         </div>
       </div>

@@ -25,15 +25,24 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    this.loadingService.requestStarted();
     if (sessionStorage.getItem('store-token') === null) {
-      return next.handle(req);
+      return next.handle(req).pipe(
+        catchError((error) => {
+          this.loadingService.requestEnded();
+          return throwError(error);
+        }),
+        finalize(() => {
+          this.loadingService.requestEnded();
+        })
+      );
     } else {
       const dupReq = req.clone({
         setHeaders: {
           'store-token': sessionStorage.getItem('store-token'),
         },
       });
-      this.loadingService.requestStarted();
+
       return next.handle(dupReq).pipe(
         catchError((error) => {
           this.loadingService.requestEnded();
