@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div id="form-pdv" class="col-8">
+    <div id="form-pdv" class="col-lg-8 col-md-6 col-sm-12">
       <mat-card style="margin-bottom: 1rem">
         <form
           [formGroup]="formProduct"
@@ -9,7 +9,7 @@
           (ngSubmit)="addProductToList(formDirective)"
         >
           <div class="row">
-            <div class="col-5 d-flex align-items-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center">
               <mat-form-field appearance="fill" color="accent">
                 <mat-label>Produto</mat-label>
                 <mat-select formControlName="product">
@@ -20,7 +20,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div class="col-4 d-flex align-items-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center">
               <mat-form-field class="example-full-width">
                 <mat-label>Quantidade</mat-label>
                 <input
@@ -31,7 +31,7 @@
                 />
               </mat-form-field>
             </div>
-            <div class="col-3 d-flex align-items-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center">
               <div class="example-button-row">
                 <button
                   type="submit"
@@ -48,7 +48,7 @@
       </mat-card>
 
       <mat-card>
-        <div class="table table-hover">
+        <div class="table table-hover col-lg-12 col-md-6 col-sm-12">
           <table class="table">
             <thead>
               <tr>
@@ -103,7 +103,7 @@
         </div>
       </mat-card>
     </div>
-    <div id="card-sub-total" class="col-4">
+    <div id="card-sub-total" class="col-lg-4 col-md-6 col-sm-12">
       <mat-card>
         <div class="row border-padding">
           <div class="col d-flex justify-content-center align-items-center">
@@ -138,7 +138,7 @@
         </div>
 
         <div class="row" style="margin: 2rem 0rem 0rem 0.1rem">
-          <div class="col-6" style="margin-bottom: 1rem">
+          <div class="col-6 d-flex justify-content-center align-items-center" style="margin-bottom: 1rem">
             <button
               type="button"
               mat-raised-button
@@ -154,7 +154,7 @@
               ></i>
             </button>
           </div>
-          <div class="col-6" style="margin-bottom: 1rem">
+          <div class="col-6 d-flex justify-content-center align-items-center" style="margin-bottom: 1rem">
             <button
               type="button"
               mat-raised-button
@@ -170,7 +170,7 @@
               ></i>
             </button>
           </div>
-          <div class="col-6">
+          <div class="col-6 d-flex justify-content-center align-items-center">
             <button
               type="button"
               mat-raised-button
@@ -186,7 +186,7 @@
               ></i>
             </button>
           </div>
-          <div class="col-6">
+          <div class="col-6 d-flex justify-content-center align-items-center">
             <button
               type="button"
               mat-raised-button
@@ -202,7 +202,7 @@
               ></i>
             </button>
           </div>
-          <div class="col-12">
+          <div class="col-12 d-flex justify-content-center align-items-center">
             <button
               id="btn-finish"
               mat-raised-button

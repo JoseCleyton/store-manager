@@ -11,6 +11,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
   public authenticate(user: any): Observable<any> {
+    console.log(URL.API)
     return this.http.post(URL.API + 'auth/authenticate', user);
   }
 

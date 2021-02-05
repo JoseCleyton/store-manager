@@ -1,71 +1,75 @@
-<mat-card class="menu">
-  <div class="row">
-    <div class="col-3 d-flex justify-content-center align-items-center">
-      <h2>Store Manager</h2>
-      <span>
-        <i class="fas fa-store"></i>
-      </span>
-    </div>
-    <nav class="row d-flex justify-content-end align-items-center">
-      <div class="col">
-        <a
-          [ngStyle]="{
-            'background-color':
-              urlRoot === '/feature/dashboard' ? 'white' : '',
-            'color': urlRoot === '/feature/dashboard' ? '#4169e1' : ''
-          }"
-          (click)="routes('dashboard')"
-          class="btn"
-          >Dashboard</a
-        >
+<div class="container-fluid">
+  <mat-card class="menu">
+    <div class="row">
+      <div
+        class="col-lg-3 col-md-2 col-sm-1 d-flex justify-content-center align-items-center"
+      >
+        <h2>Store Manager</h2>
+        <span>
+          <i class="fas fa-store"></i>
+        </span>
       </div>
-      <div class="col">
-        <a
-          [ngStyle]="{
-            'background-color':
-              urlRoot === '/feature/point-sale' ? 'white' : '',
-            'color': urlRoot === '/feature/point-sale' ? '#4169e1' : ''
-          }"
-          class="btn"
-          (click)="routes('point-sale')"
-          >PDV</a
-        >
+        <nav class="row d-flex justify-content-end align-items-center">
+          <div class="col">
+            <a
+              [ngStyle]="{
+                'background-color':
+                  urlRoot === '/feature/dashboard' ? 'white' : '',
+                color: urlRoot === '/feature/dashboard' ? '#4169e1' : ''
+              }"
+              (click)="routes('dashboard')"
+              class="btn"
+              >Dashboard</a
+            >
+          </div>
+          <div class="col">
+            <a
+              [ngStyle]="{
+                'background-color':
+                  urlRoot === '/feature/point-sale' ? 'white' : '',
+                color: urlRoot === '/feature/point-sale' ? '#4169e1' : ''
+              }"
+              class="btn"
+              (click)="routes('point-sale')"
+              >PDV</a
+            >
+          </div>
+          <div class="col">
+            <a
+              [ngStyle]="{
+                'background-color':
+                  urlRoot === '/feature/client' ? 'white' : '',
+                color: urlRoot === '/feature/client' ? '#4169e1' : ''
+              }"
+              (click)="routes('client')"
+              class="btn"
+              >Clientes</a
+            >
+          </div>
+          <div class="col">
+            <a
+              [ngStyle]="{
+                'background-color': urlRoot === '/feature/stock' ? 'white' : '',
+                color: urlRoot === '/feature/stock' ? '#4169e1' : ''
+              }"
+              class="btn"
+              (click)="routes('stock')"
+              >Estoque</a
+            >
+          </div>
+          <div class="col">
+            <a
+              [ngStyle]="{
+                'background-color':
+                  urlRoot === '/feature/cashier' ? 'white' : '',
+                color: urlRoot === '/feature/cashier' ? '#4169e1' : ''
+              }"
+              class="btn"
+              (click)="routes('cashier')"
+              >Caixa</a
+            >
+          </div>
+        </nav>
       </div>
-      <div class="col">
-        <a
-          [ngStyle]="{
-            'background-color':
-              urlRoot === '/feature/client' ? 'white' : '',
-            'color': urlRoot === '/feature/client' ? '#4169e1' : ''
-          }"
-          (click)="routes('client')"
-          class="btn"
-          >Clientes</a
-        >
-      </div>
-      <div class="col">
-        <a
-          [ngStyle]="{
-            'background-color':
-              urlRoot === '/feature/stock' ? 'white' : '',
-            'color': urlRoot === '/feature/stock' ? '#4169e1' : ''
-          }"
-          class="btn"
-          (click)="routes('stock')"
-          >Estoque</a
-        >
-      </div>
-      <div class="col">
-        <a
-          [ngStyle]="{
-            'background-color':    urlRoot === '/feature/cashier' ? 'white' : '',
-            'color': urlRoot === '/feature/cashier' ? '#4169e1' : ''
-          }"
-          class="btn"
-          (click)="routes('cashier')"
-          >Caixa</a
-        >
-      </div>
-    </nav>
-  </div>
-</mat-card>
+  </mat-card>
+</div>
