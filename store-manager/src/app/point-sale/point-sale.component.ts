@@ -1,69 +1,66 @@
+import { Iten } from './../models/iten.model';
+import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 import { CheckoutComponent } from './../checkout/checkout.component';
-import { Product } from './../models/product';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { Product } from '../models/product.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import * as fromStock from '../stock/state/index';
+import { AppState } from '../state';
+import * as fromPointSale from './state/index';
+import { Checkout } from '../models/checkout.model';
+
 @Component({
   selector: 'app-point-sale',
   templateUrl: './point-sale.component.html',
   styleUrls: ['./point-sale.component.scss'],
 })
-export class PointSaleComponent implements OnInit {
-  public listItens: Product[] = [];
+export class PointSaleComponent implements OnInit, OnDestroy {
+  public listItens: Iten[] = [];
+  public idIten = 1;
   public time;
   public day: string;
   public stock: Product[] = [];
   public formProduct: FormGroup;
+  public formDiscount: FormGroup;
   public itemsEdit = [];
   public subTotal = 0;
 
   public paymentType = '';
 
-  constructor(public dialog: MatDialog) {}
+  public subscription: Subscription = new Subscription();
+
+  constructor(public dialog: MatDialog, private store$: Store<AppState>) {}
 
   ngOnInit(): void {
+    this.store$.dispatch(new fromStock.actions.ListStock());
+    this.subscribeToStock();
     this.formProduct = new FormGroup({
       product: new FormControl('', [Validators.required]),
       quantity: new FormControl('', [Validators.required, Validators.min(1)]),
     });
 
+    this.formDiscount = new FormGroup({
+      percentageDiscount: new FormControl(0, [Validators.required]),
+      discountMoney: new FormControl(0, [
+        Validators.required,
+        Validators.min(1),
+      ]),
+    });
+
     this.time = this.getFullDate();
     this.day = this.getDayName(new Date().getDay());
-
-    this.stock = [
-      {
-        id: '1',
-        name: 'Fogão',
-        price: 89,
-        quantity: 30,
-      },
-      {
-        id: '2',
-        name: 'Toalha',
-        price: 20,
-        quantity: 20,
-      },
-      {
-        id: '3',
-        name: 'Geladeira',
-        price: 58,
-        quantity: 20,
-      },
-      {
-        id: '4',
-        name: 'Sofá',
-        price: 96,
-        quantity: 20,
-      },
-      {
-        id: '5',
-        name: 'Cama',
-        price: 150.7,
-        quantity: 20,
-      },
-    ];
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
   public getFullDate(): any {
     return (
       new Date().getDate() +
@@ -88,27 +85,40 @@ export class PointSaleComponent implements OnInit {
     return dayName[day];
   }
 
-  public addProductToList(formDirective: FormGroupDirective) {
+  public addProductToList(formDirective: FormGroupDirective): void {
     const product: Product = this.formProduct.get('product').value;
-    product.quantity = this.formProduct.get('quantity').value;
-    this.listItens.push(product);
+    const quantity = this.formProduct.get('quantity').value;
+    let contains = false;
 
-    formDirective.resetForm()
-    this.formProduct.reset();
-    
-    this.subTotal = 0;
-    this.listItens.filter((p) => {
-      this.subTotal += p.price * p.quantity;
+    this.listItens.forEach((p) => {
+      if (product._id === p.product._id) {
+        p.quantity += quantity;
+        contains = true;
+        return;
+      }
     });
+    if (!contains) {
+      const iten: Iten = {
+        id: this.idIten,
+        quantity: quantity,
+        product: product,
+      };
+      this.idIten++;
+      this.listItens.push(iten);
+    }
+
+    formDirective.resetForm();
+    this.formProduct.reset();
+
+    this.subTotal = 0;
+    this.calculateSubTotal();
   }
 
-  public closeOrder() {}
-
-  public selectItem(product: Product) {
-    if (!this.itemsEdit.includes(product.id)) {
-      this.itemsEdit.push(product.id);
+  public selectItem(iten: Iten): void {
+    if (!this.itemsEdit.includes(iten.id)) {
+      this.itemsEdit.push(iten.id);
     } else {
-      this.itemsEdit.splice(this.itemsEdit.indexOf(product.id), 1);
+      this.itemsEdit.splice(this.itemsEdit.indexOf(iten.id), 1);
     }
   }
 
@@ -116,15 +126,11 @@ export class PointSaleComponent implements OnInit {
     if (quantity == 0) {
       this.listItens.splice(this.listItens.indexOf(product), 1);
       this.subTotal = 0;
-      this.listItens.filter((p) => {
-        this.subTotal += p.price * p.quantity;
-      });
+      this.calculateSubTotal();
     } else {
       product.quantity = quantity;
       this.subTotal = 0;
-      this.listItens.filter((p) => {
-        this.subTotal += p.price * p.quantity;
-      });
+      this.calculateSubTotal();
     }
   }
 
@@ -133,6 +139,27 @@ export class PointSaleComponent implements OnInit {
   }
 
   openDialog() {
+    let checkout: Checkout = {
+      listItens: this.listItens,
+      paymentType: this.paymentType,
+      discountMoney: this.formDiscount.get('discountMoney').value,
+    };
+    this.store$.dispatch(new fromPointSale.actions.SelectCheckout(checkout));
     this.dialog.open(CheckoutComponent);
+  }
+
+  public subscribeToStock(): void {
+    this.subscription.add(
+      this.store$
+        .pipe(select(fromStock.selectors.selectProducts))
+        .subscribe((state) => {
+          this.stock = state;
+        })
+    );
+  }
+  private calculateSubTotal(): void {
+    this.listItens.filter((iten) => {
+      this.subTotal += iten.product.price * iten.quantity;
+    });
   }
 }

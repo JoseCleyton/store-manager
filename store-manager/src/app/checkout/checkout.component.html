@@ -1,15 +1,14 @@
 <div class="container-fluid">
-  <mat-horizontal-stepper #stepper>
-    <mat-step>
-      <ng-template matStepLabel>Itens do Pedido</ng-template>
-      <mat-card style="margin-bottom: 1rem">
-        <div class="row">
-          <div class="table table-hover">
+  <div class="row">
+    <mat-horizontal-stepper #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Itens do Pedido</ng-template>
+        <mat-card style="margin-bottom: 1rem">
+          <div class="table-responsive table-hover">
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col" class="text-center">Selecionar</th>
-                  <th scope="col" class="text-center">COD</th>
+                  <th scope="col" class="text-center">Selec.</th>
                   <th scope="col" class="text-center">Nome</th>
                   <th scope="col" class="text-center">Valor</th>
                   <th scope="col" class="text-center">QTD</th>
@@ -33,10 +32,9 @@
                     </section>
                   </td>
 
-                  <td class="text-center">{{ item.id }}</td>
-                  <td class="text-center">{{ item.name }}</td>
+                  <td class="text-center">{{ item.product.name }}</td>
                   <td class="text-center">
-                    {{ item.price | currency: "BRL" }}
+                    {{ item.product.price | currency: "BRL" }}
                   </td>
                   <td class="text-center">
                     <input
@@ -52,123 +50,152 @@
               </tbody>
             </table>
           </div>
-        </div>
-      </mat-card>
+        </mat-card>
 
-      <div class="row">
-        <div class="col-10">
-          <button mat-raised-button matStepperNext>Próximo</button>
-        </div>
-        <div class="col-2">
-          <button mat-stroked-button mat-dialog-close>Fechar</button>
-        </div>
-      </div>
-    </mat-step>
-
-    <mat-step>
-      <ng-template matStepLabel>Valor / Método de Pagamento</ng-template>
-      <div class="row">
-        <div class="col">
-          <h3 style="font-weight: bold">
-            Total: {{ subTotal | currency: "BRL" }}
-          </h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-3" style="margin-bottom: 1rem">
-          <button
-            type="button"
-            mat-raised-button
-            class="btn btn-light"
-            style="width: 10rem"
-          >
-            <span style="margin: 0.2rem"> Crédito </span>
-            <i class="fas fa-check" style="color: #43b39e"></i>
-          </button>
-        </div>
-        <div class="col-3" style="margin-bottom: 1rem">
-          <button
-            type="button"
-            mat-raised-button
-            class="btn btn-light"
-            style="width: 10rem"
-          >
-            <span style="margin: 0.2rem"> Débito </span>
-            <i class="fas fa-check" style="color: #43b39e"></i>
-          </button>
-        </div>
-        <div class="col-3">
-          <button
-            type="button"
-            mat-raised-button
-            class="btn btn-light"
-            style="width: 10rem"
-          >
-            <span style="margin: 0.2rem"> Dinheiro </span>
-            <i class="fas fa-check" style="color: #43b39e"></i>
-          </button>
-        </div>
-        <div class="col-3">
-          <button
-            type="button"
-            mat-raised-button
-            class="btn btn-light"
-            style="width: 10rem"
-          >
-            <span style="margin: 0.2rem"> Transferência </span>
-            <i class="fas fa-check" style="color: #43b39e"></i>
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-2">
-          <button mat-raised-button matStepperPrevious>Voltar</button>
-        </div>
-        <div class="col-8">
-          <button mat-raised-button matStepperNext>Próximo</button>
-        </div>
-        <div class="col-2">
-          <button mat-stroked-button mat-dialog-close>Fechar</button>
-        </div>
-      </div>
-    </mat-step>
-
-    <mat-step [stepControl]="formClient">
-      <form
-        [formGroup]="formClient"
-        #formDirective="ngForm"
-        (ngSubmit)="concluir(formDirective)"
-      >
-        <ng-template matStepLabel>Dados do Cliente</ng-template>
-        <mat-form-field appearance="fill" color="accent">
-          <mat-label>Cliente</mat-label>
-          <mat-select formControlName="client">
-            <mat-option>--</mat-option>
-            <mat-option *ngFor="let item of clients" [value]="item">
-              {{ item.name }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
         <div class="row">
-          <div class="col-2">
-            <button mat-raised-button matStepperPrevious>Voltar</button>
-          </div>
-          <div class="col-8">
-            <button
-              type="submit"
-              mat-raised-button
-              matStepperNext
-              color="primary"
-              [disabled]="!formClient.valid"
-            >
-              Concluir
-            </button>
+          <div class="col-10">
+            <button mat-raised-button matStepperNext>Próximo</button>
           </div>
           <div class="col-2">
             <button mat-stroked-button mat-dialog-close>Fechar</button>
           </div>
         </div>
-      </form>
-    </mat-step>
-  </mat-horizontal-stepper>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Valor / Método de Pagamento</ng-template>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h3 style="font-weight: bold">
+              Total: {{ checkout.orderValue | currency: "BRL" }}
+            </h3>
+          </div>
+          <div class="col-lg-4 col-md-6 col-sm-12">
+            <h3>SubTotal: {{ subTotal | currency: "BRL" }}</h3>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12">
+            <h3>Desconto R$: {{ checkout.discountMoney | currency: "BRL" }}</h3>
+          </div>
+          <div class="col-lg-2 col-md-6 col-sm-12">
+            <h3>Desconto %: {{ checkout.percentageDiscount | percent }}</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom: 1rem">
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              [disabled]="paymentType !== 'credit'"
+            >
+              <span style="margin: 0.2rem"> Crédito </span>
+              <i
+                class="fas fa-check"
+                style="color: #43b39e"
+                *ngIf="paymentType === 'credit'"
+              ></i>
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom: 1rem">
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              [disabled]="paymentType !== 'debit'"
+            >
+              <span style="margin: 0.2rem"> Débito </span>
+              <i
+                class="fas fa-check"
+                style="color: #43b39e"
+                *ngIf="paymentType === 'debit'"
+              ></i>
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom: 1rem">
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              [disabled]="paymentType !== 'money'"
+            >
+              <span style="margin: 0.2rem"> Dinheiro </span>
+              <i
+                class="fas fa-check"
+                style="color: #43b39e"
+                *ngIf="paymentType === 'money'"
+              ></i>
+            </button>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-12" style="margin-bottom: 1rem">
+            <button
+              type="button"
+              mat-raised-button
+              class="btn btn-light"
+              style="width: 10rem"
+              [disabled]="paymentType !== 'transf'"
+            >
+              <span style="margin: 0.2rem"> Transferência </span>
+              <i
+                class="fas fa-check"
+                style="color: #43b39e"
+                *ngIf="paymentType === 'transf'"
+              ></i>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-2">
+            <button mat-raised-button matStepperPrevious>Voltar</button>
+          </div>
+          <div class="col-8">
+            <button mat-raised-button matStepperNext>Próximo</button>
+          </div>
+          <div class="col-2">
+            <button mat-stroked-button mat-dialog-close>Fechar</button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step [stepControl]="formClient">
+        <form
+          [formGroup]="formClient"
+          #formDirective="ngForm"
+          (ngSubmit)="concluir(formDirective)"
+        >
+          <ng-template matStepLabel>Dados do Cliente</ng-template>
+          <mat-form-field appearance="fill" color="accent">
+            <mat-label>Cliente</mat-label>
+            <mat-select formControlName="client">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let item of clients" [value]="item._id">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="row">
+            <div class="col-2">
+              <button mat-raised-button matStepperPrevious>Voltar</button>
+            </div>
+            <div class="col-8">
+              <button
+                type="submit"
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                [disabled]="!formClient.valid"
+              >
+                Concluir
+              </button>
+            </div>
+            <div class="col-2">
+              <button mat-stroked-button mat-dialog-close (click)="onNoClick()">Fechar</button>
+            </div>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
 </div>

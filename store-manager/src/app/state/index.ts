@@ -3,12 +3,16 @@ import * as login from '../login/state/index';
 import * as client from '../client/client-edit/state/index';
 import * as alert from '../shared/alert/alert/state/index';
 import * as stock from '../stock/state/index';
+import * as pointSale from '../point-sale/state/index';
+import * as checkout from '../checkout/state/index';
 
 export interface AppState {
   login: login.reducer.LoginState;
   client: client.reducer.ClientState;
   alert: alert.reducer.AlertState;
   stock: stock.reducer.StockState;
+  pointSale: pointSale.reducer.PointSaleState;
+  checkout: checkout.reducer.CheckoutState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -16,12 +20,15 @@ export const reducers: ActionReducerMap<AppState> = {
   client: client.reducer.clientReducer,
   alert: alert.reducer.alertReducer,
   stock: stock.reducer.stockReducer,
+  pointSale: pointSale.reducer.pointSaleReducer,
+  checkout: checkout.reducer.checkoutReducer,
 };
 
 export const effects: Array<any> = [
   login.effects,
   client.effects,
   stock.effects,
+  checkout.effects,
 ];
 
 export const initialState = {
@@ -29,4 +36,6 @@ export const initialState = {
   client: client.reducer.initialState,
   alert: alert.reducer.initialState,
   stock: stock.reducer.initialState,
+  pointSale: pointSale.reducer.initialState,
+  checkout: checkout.reducer.initialState,
 };

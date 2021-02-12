@@ -1,3 +1,4 @@
+import { ShortDescriptionPipe } from './pipe/short-description.pipe';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
@@ -6,8 +7,8 @@ import { AlertComponent } from './alert/alert/alert.component';
 
 @NgModule({
   imports: [Interceptor, CommonModule],
-  declarations: [AlertComponent],
+  declarations: [AlertComponent, ShortDescriptionPipe],
   entryComponents: [AlertComponent],
-  exports: [AlertComponent],
+  exports: [AlertComponent, ShortDescriptionPipe],
 })
 export class SharedModule {}

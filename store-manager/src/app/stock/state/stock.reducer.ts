@@ -1,8 +1,8 @@
+import { Product } from '../../models/product.model';
 import { StockActions, StockActionsTypes } from './stock.actions';
 
-
 export interface StockState {
-  products: any[];
+  products: Product[];
   selectedProduct: any;
 }
 

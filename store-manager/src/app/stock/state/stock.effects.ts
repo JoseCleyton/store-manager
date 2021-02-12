@@ -8,10 +8,7 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class StockEffects {
-  constructor(
-    private actions$: Actions,
-    private stockService: StockService
-  ) {}
+  constructor(private actions$: Actions, private stockService: StockService) {}
 
   @Effect()
   addProduct = this.actions$.pipe(
@@ -20,7 +17,10 @@ export class StockEffects {
       this.stockService.addProduct(action.payload).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Produto cadastrado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Produto cadastrado com sucesso...',
+            }),
             new actions.AddStockSuccess(response),
           ];
         }),
@@ -49,7 +49,10 @@ export class StockEffects {
       this.stockService.editProduct(action.payload).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Produto atualizado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Produto atualizado com sucesso...',
+            }),
             new actions.EditStockSuccess(response.product),
           ];
         }),
@@ -65,7 +68,10 @@ export class StockEffects {
       this.stockService.delProduct(action.id).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Produto deletado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Produto deletado com sucesso...',
+            }),
             new actions.DeleteProductSuccess(action.id),
           ];
         }),

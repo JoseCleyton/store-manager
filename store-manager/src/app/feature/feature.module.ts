@@ -1,3 +1,4 @@
+import { ShortDescriptionPipe } from './../shared/pipe/short-description.pipe';
 import { StockModule } from './../stock/stock.module';
 import { PointSaleModule } from './../point-sale/point-sale.module';
 import { DashboardModule } from './../dashboard/dashboard.module';

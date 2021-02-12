@@ -3,11 +3,13 @@ import { AlertActions, AlertActionsTypes } from './alert.actions';
 export interface AlertState {
   alertsSuccess: any[];
   alertsErrs: any[];
+  alertsWarning: any[];
 }
 
 export const initialState: AlertState = {
   alertsSuccess: [],
   alertsErrs: [],
+  alertsWarning: [],
 };
 
 export function alertReducer(
@@ -27,11 +29,18 @@ export function alertReducer(
         alertsErrs: [...state.alertsErrs, action.alert],
       };
     }
+    case AlertActionsTypes.WARNING: {
+      return {
+        ...state,
+        alertsWarning: [...state.alertsWarning, action.alert],
+      };
+    }
     case AlertActionsTypes.RESET_ALERT: {
       return {
         ...state,
         alertsSuccess: [],
         alertsErrs: [],
+        alertsWarning: [],
       };
     }
     default:

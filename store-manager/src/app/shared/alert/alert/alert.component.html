@@ -1,12 +1,16 @@
-<div class="container-alert" *ngIf="alertsSuccess.length > 0" style="margin-top: 2rem;">
+<div
+  class="container-alert"
+  *ngIf="alertsSuccess.length > 0"
+  style="margin-top: 2rem"
+>
   <div style="display: inline-block">
-    <div class="row" style="padding: 0.3rem">
-      <div
-        class="alert alert-success"
-        role="alert"
-        *ngFor="let alertSuccess of alertsSuccess"
-      >
-        {{ alertSuccess }}
+    <div
+      class="row"
+      style="padding: 0.3rem"
+      *ngFor="let alertSuccess of alertsSuccess"
+    >
+      <div class="alert alert-{{ alertSuccess.type }}" role="alert">
+        {{ alertSuccess.message }}
         <button class="btn" (click)="closeAlertError()">
           <i class="fas fa-times"></i>
         </button>
@@ -16,15 +20,41 @@
   <br />
 </div>
 
-<div class="container-alert" *ngIf="alertsErrs.length > 0" style="margin-top: 2rem;">
+<div
+  class="container-alert"
+  *ngIf="alertsErrs.length > 0"
+  style="margin-top: 2rem"
+>
   <div style="display: inline-block">
-    <div class="row" style="padding: 0.3rem">
-      <div
-        class="alert alert-danger"
-        role="alert"
-        *ngFor="let alertErr of alertsErrs"
-      >
+    <div
+      class="row"
+      style="padding: 0.3rem"
+      *ngFor="let alertErr of alertsErrs"
+    >
+      <div class="alert alert-danger" role="alert">
         {{ alertErr }}
+        <button class="btn" (click)="closeAlertError()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <br />
+</div>
+
+<div
+  class="container-alert"
+  *ngIf="alertsWarning.length > 0"
+  style="margin-top: 2rem"
+>
+  <div style="display: inline-block">
+    <div
+      class="row"
+      style="padding: 0.3rem"
+      *ngFor="let alertWarning of alertsWarning"
+    >
+      <div class="alert alert-warning" role="alert">
+        {{ alertWarning }}
         <button class="btn" (click)="closeAlertError()">
           <i class="fas fa-times"></i>
         </button>

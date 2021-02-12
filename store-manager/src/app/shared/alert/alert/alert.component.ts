@@ -12,14 +12,15 @@ import { AppState } from 'src/app/state';
 export class AlertComponent implements OnInit, OnDestroy {
   public alertsSuccess = [];
   public alertsErrs = [];
-
+  public alertsWarning = [];
   public subscription: Subscription = new Subscription();
 
   constructor(private store$: Store<AppState>) {}
 
   ngOnInit(): void {
     this.subscribeToAlertsSuccess();
-    this.subscribeToAlertsErros();
+    this.subscribeToAlertsErrs();
+    this.subscribeToAlertsWarning();
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -35,7 +36,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     );
   }
 
-  public subscribeToAlertsErros() {
+  public subscribeToAlertsErrs() {
     this.subscription.add(
       this.store$
         .pipe(select(fromAlert.selectors.selectAlertsErrs))
@@ -44,7 +45,15 @@ export class AlertComponent implements OnInit, OnDestroy {
         })
     );
   }
-
+  public subscribeToAlertsWarning() {
+    this.subscription.add(
+      this.store$
+        .pipe(select(fromAlert.selectors.selectAlertsWarning))
+        .subscribe((state) => {
+          this.alertsWarning = state;
+        })
+    );
+  }
   public closeAlertError() {
     this.store$.dispatch(new fromAlert.actions.ResetAlert());
   }

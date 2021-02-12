@@ -12,3 +12,7 @@ export const selectAlertsErrs = createSelector(
   selectAlert,
   state => state.alertsErrs
 );
+export const selectAlertsWarning = createSelector(
+  selectAlert,
+  state => state.alertsWarning
+);

@@ -1,3 +1,4 @@
+import { ShortDescriptionPipe } from './../shared/pipe/short-description.pipe';
 import { CheckoutModule } from './../checkout/checkout.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [PointSaleComponent],
@@ -26,6 +28,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
     CheckoutModule
   ],
-  exports: [PointSaleComponent],
+  exports: [PointSaleComponent]
 })
 export class PointSaleModule {}

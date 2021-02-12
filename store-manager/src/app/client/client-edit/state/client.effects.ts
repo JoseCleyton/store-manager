@@ -20,7 +20,10 @@ export class ClientEffects {
       this.clienteService.addClient(action.payload).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Cliente cadastrado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Cliente cadastrado com sucesso...',
+            }),
             new actions.AddClientSuccess(response),
           ];
         }),
@@ -49,7 +52,10 @@ export class ClientEffects {
       this.clienteService.editClient(action.payload).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Cliente atualizado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Cliente atualizado com sucesso...',
+            }),
             new actions.EditClientSuccess(response.client),
           ];
         }),
@@ -65,7 +71,10 @@ export class ClientEffects {
       this.clienteService.delClient(action.id).pipe(
         switchMap((response) => {
           return [
-            new fromAlert.actions.Success('Cliente deletado com sucesso...'),
+            new fromAlert.actions.Success({
+              type: 'success',
+              message: 'Cliente deletado com sucesso...',
+            }),
             new actions.DeleteClientSuccess(action.id),
           ];
         }),

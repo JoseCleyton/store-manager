@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export enum AlertActionsTypes {
   SUCCESS = '[ALERT] Success',
   ERROR = '[ALERT] Error',
+  WARNING = '[ALERT] Warning',
   RESET_ALERT = '[ALERT] Reset Alert',
 }
 
@@ -16,9 +17,14 @@ export class Error implements Action {
   constructor(public alert: any) {}
 }
 
+export class Warning implements Action {
+  readonly type = AlertActionsTypes.WARNING;
+  constructor(public alert: any) {}
+}
+
 export class ResetAlert implements Action {
   readonly type = AlertActionsTypes.RESET_ALERT;
   constructor() {}
 }
 
-export type AlertActions = Success | Error | ResetAlert;
+export type AlertActions = Success | Error | Warning | ResetAlert;
