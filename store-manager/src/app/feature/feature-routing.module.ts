@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('../stock/stock.module').then((m) => m.StockModule),
       },
+      {
+        path: 'cashier',
+        loadChildren: () =>
+          import('../cashier/cashier.module').then((m) => m.CashierModule),
+      },
     ],
   },
 ];

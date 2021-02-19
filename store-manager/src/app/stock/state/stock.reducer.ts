@@ -4,11 +4,13 @@ import { StockActions, StockActionsTypes } from './stock.actions';
 export interface StockState {
   products: Product[];
   selectedProduct: any;
+  totalStock: number;
 }
 
 export const initialState: StockState = {
   products: [],
   selectedProduct: undefined,
+  totalStock: undefined,
 };
 
 export function stockReducer(
@@ -27,6 +29,13 @@ export function stockReducer(
       return {
         ...state,
         products: action.payload,
+      };
+    }
+
+    case StockActionsTypes.TOTAL_STOCK_SUCCESS: {
+      return {
+        ...state,
+        totalStock: action.total,
       };
     }
 

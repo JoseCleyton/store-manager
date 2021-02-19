@@ -46,6 +46,19 @@ export class ClientEffects {
   );
 
   @Effect()
+  totalClients = this.actions$.pipe(
+    ofType<actions.TotalClients>(actions.ClientActionsTypes.TOTAL_CLIENTS),
+    switchMap((action) =>
+      this.clienteService.getTotalClients().pipe(
+        map((response) => {
+          return new actions.TotalClientsSuccess(response.total);
+        }),
+        catchError((err) => of(new fromAlert.actions.Error(err.message)))
+      )
+    )
+  );
+
+  @Effect()
   editClient = this.actions$.pipe(
     ofType<actions.EditClient>(actions.ClientActionsTypes.EDIT_CLIENT),
     switchMap((action) =>

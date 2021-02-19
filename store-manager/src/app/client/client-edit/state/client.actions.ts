@@ -7,6 +7,9 @@ export enum ClientActionsTypes {
   LIST_CLIENTS = '[Client] List Clients',
   LIST_CLIENTS_SUCCESS = '[Client] List Clients success',
 
+  TOTAL_CLIENTS = '[Client] Total Clients',
+  TOTAL_CLIENTS_SUCCESS = '[Client] Total Clients success',
+
   EDIT_CLIENT = '[Client] Edit Client',
   EDIT_CLIENT_SUCCESS = '[Client] Edit Client Success',
 
@@ -34,6 +37,16 @@ export class ListClients implements Action {
 export class ListClientsSuccess implements Action {
   readonly type = ClientActionsTypes.LIST_CLIENTS_SUCCESS;
   constructor(public payload: any[]) {}
+}
+
+export class TotalClients implements Action {
+  readonly type = ClientActionsTypes.TOTAL_CLIENTS;
+  constructor() {}
+}
+
+export class TotalClientsSuccess implements Action {
+  readonly type = ClientActionsTypes.TOTAL_CLIENTS_SUCCESS;
+  constructor(public total: number) {}
 }
 
 export class EditClient implements Action {
@@ -70,4 +83,6 @@ export type ClientActions =
   | DeleteClient
   | DeleteClientSuccess
   | EditClient
-  | EditClientSuccess;
+  | EditClientSuccess
+  | TotalClients
+  | TotalClientsSuccess;

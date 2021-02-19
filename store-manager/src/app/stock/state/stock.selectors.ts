@@ -7,7 +7,10 @@ export const selectProducts = createSelector(
   selectStock,
   (state) => state.products
 );
-
+export const selectTotalStock = createSelector(
+  selectStock,
+  (state) => state.totalStock
+);
 export const selectSelectedProduct = createSelector(
   selectStock,
   (state) => state.selectedProduct

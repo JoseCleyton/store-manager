@@ -4,11 +4,13 @@ import { ClientActions } from './client.actions';
 export interface ClientState {
   clients: any[];
   selectedClient: any;
+  totalClients: number;
 }
 
 export const initialState: ClientState = {
   clients: [],
   selectedClient: undefined,
+  totalClients: undefined,
 };
 
 export function clientReducer(
@@ -29,7 +31,12 @@ export function clientReducer(
         clients: action.payload,
       };
     }
-
+    case ClientActionsTypes.TOTAL_CLIENTS_SUCCESS: {
+      return {
+        ...state,
+        totalClients: action.total,
+      };
+    }
     case ClientActionsTypes.EDIT_CLIENT_SUCCESS: {
       return {
         ...state,

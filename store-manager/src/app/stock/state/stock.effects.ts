@@ -43,6 +43,18 @@ export class StockEffects {
   );
 
   @Effect()
+  totalStock = this.actions$.pipe(
+    ofType<actions.TotalStock>(actions.StockActionsTypes.TOTAL_STOCK),
+    switchMap((action) =>
+      this.stockService.getTotalStock().pipe(
+        map((response) => {
+          return new actions.TotalStockSuccess(response.total);
+        }),
+        catchError((err) => of(new fromAlert.actions.Error(err.message)))
+      )
+    )
+  );
+  @Effect()
   editProduct = this.actions$.pipe(
     ofType<actions.EditStock>(actions.StockActionsTypes.EDIT_STOCK),
     switchMap((action) =>

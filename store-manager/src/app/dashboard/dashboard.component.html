@@ -1,7 +1,7 @@
 <div id="dashboard" class="container-fluid">
   <div class="container">
     <div class="row">
-      <div class="col-xl-3 col-md-6 mb-12">
+      <div class="col-xl-4 col-md-6 mb-12">
         <div class="card border-left-primary shadow h-100 py-2">
           <div class="card-body">
             <div class="row align-items-center">
@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 mb-12">
+      <div class="col-xl-4 col-md-6 mb-12">
         <div class="card border-left-success shadow h-100 py-2">
           <div class="card-body">
             <div class="row align-items-center">
@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-3 col-md-6 mb-12">
+      <div class="col-xl-4 col-md-6 mb-12">
         <div class="card border-left-success shadow h-100 py-2">
           <div class="card-body">
             <div class="row align-items-center">
@@ -62,33 +62,9 @@
               </div>
               <div class="col-8">
                 <div class="font-weight-bold text-uppercase text-left">
-                  R$ 250,00
+                  {{ cashierValue | currency: "BRL" }}
                 </div>
                 <div class="text-lowercase">Valor em Caixa</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xl-3 col-md-6 mb-12">
-        <div class="card border-left-success shadow h-100 py-2">
-          <div class="card-body">
-            <div class="row align-items-center">
-              <div class="col-4">
-                <div>
-                  <img
-                    src="../../assets/img/movimentacoes.png"
-                    alt="Clientes"
-                    style="width: 50px; height: 50"
-                  />
-                </div>
-              </div>
-              <div class="col-8">
-                <div class="font-weight-bold text-uppercase text-left">
-                  <i class="fas fa-arrow-up"></i
-                  ><i class="fas fa-arrow-down"></i>
-                </div>
-                <div class="text-lowercase">Movimentações</div>
               </div>
             </div>
           </div>
